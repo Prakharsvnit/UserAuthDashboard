@@ -9,12 +9,14 @@ export default function LoginForm() {
             flexDirection: "column",
             display: "flex",
             height: 600,
-            mt: 25,
+            justifyContent: "center",
             textAlign: "center",
             p: 5,
           }}
         >
-          <Typography variant="h5" sx={{mb:2}}>Login</Typography>
+          <Typography variant="h4" sx={{ mb: 2 }}>
+            Login
+          </Typography>
           <TextField
             margin="normal"
             required
@@ -35,7 +37,13 @@ export default function LoginForm() {
             id="password"
             autoComplete="current-password"
           />
-          <Button variant="contained" type="submit" sx={{mt:2}} color="primary" fullWidth="true">
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{ mt: 2,height:60 }}
+            color="primary"
+            fullWidth
+          >
             Submit
           </Button>
         </Box>
