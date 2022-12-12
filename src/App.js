@@ -1,11 +1,13 @@
 // import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
+import Dashboard from "./components/Dashboard";
+// import RegisterForm from "./components/RegisterForm";
 
 function App() {
   return (
     <div className="App">
       {/* <LoginForm /> */}
-      <RegisterForm />
+      {/* <RegisterForm /> */}
+      <Dashboard />
     </div>
   );
 }
