@@ -25,7 +25,7 @@ export default function LoginForm() {
             name="email"
             autoComplete="email"
             autoFocus
-          />{""}
+          />
           <TextField
             margin="normal"
             required
@@ -35,7 +35,7 @@ export default function LoginForm() {
             type="password"
             id="password"
             autoComplete="current-password"
-          />{""}
+          />
           <TextField
             margin="normal"
             required
