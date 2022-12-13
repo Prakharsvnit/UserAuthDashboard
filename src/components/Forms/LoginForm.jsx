@@ -42,7 +42,7 @@ export default function LoginForm() {
                     required
                     as={TextField}
                     label="Email"
-                    type="Email"
+                    type="email"
                     name="email"
                     fullWidth
                     variant="outlined"

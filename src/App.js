@@ -6,9 +6,9 @@ import LoginForm from "./components/Forms/LoginForm";
 function App() {
   return (
     <div className="App">
-      <LoginForm/>
+      {/* <LoginForm/> */}
       {/* <Dashboard /> */}
-      {/* <RegisterForm /> */}
+      <RegisterForm />
     </div>
   );
 }
