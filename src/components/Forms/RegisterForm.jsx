@@ -1,3 +1,5 @@
+/* eslint-disable */
+import React from 'react';
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { RegisterFormValidation } from "../../formValidation/RegisterFormValidation";
