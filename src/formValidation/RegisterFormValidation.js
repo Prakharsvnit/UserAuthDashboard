@@ -2,8 +2,10 @@ import * as yup from "yup";
 
 const PhoneNumberRegEx = /^[789]\d{9}$/;
 const PasswordRegEx =
+//eslint-disable-next-line 
   /^.*((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/;
 const EmailRegEx =
+//eslint-disable-next-line 
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export const RegisterFormValidation = yup.object().shape({
