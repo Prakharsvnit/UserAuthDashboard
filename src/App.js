@@ -1,14 +1,12 @@
-import Dashboard from "./components/Forms/Dashboard";
-import RegisterForm from "./components/Forms/RegisterForm";
-import LoginForm from "./components/Forms/LoginForm";
-
+import { Box } from "@mui/material";
+import Home from "./components/Home"
 
 function App() {
   return (
     <div className="App">
-      {/* <LoginForm/> */}
-      {/* <Dashboard /> */}
-      <RegisterForm />
+      <Box sx={{ display: "flex", flexDirection: "row",justifyContent:'space-between' }}>
+        <Home />
+      </Box>
     </div>
   );
 }

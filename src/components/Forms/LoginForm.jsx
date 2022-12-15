@@ -1,6 +1,6 @@
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import  {LoginFormValidation}  from "../../formValidation/LoginFormValidation";
+import { LoginFormValidation } from "../../formValidation/LoginFormValidation";
 
 export default function LoginForm() {
   const loginInitValue = {

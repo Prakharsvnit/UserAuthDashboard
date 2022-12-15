@@ -40,7 +40,7 @@ export const RegisterFormValidation = yup.object().shape({
     .string()
     .required("Enter Your Password")
     .matches(PasswordRegEx, "Uppercase Lowercase Special char Required")
-    .min(5, "Password Should be minimum 5 character")
+    .min(6, "Password Should be minimum 6 character")
     .max(10, "Too long"),
 
   referral: yup

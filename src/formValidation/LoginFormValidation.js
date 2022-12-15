@@ -15,6 +15,6 @@ export const LoginFormValidation = yup.object().shape({
     .string()
     .required("Enter Your Password")
     .matches(PasswordRegEx, "Uppercase Lowercase letters only")
-    .min(5, "Password Should be minimum 5 character")
+    .min(6, "Password Should be minimum 6 character")
     .max(10, "Too long"),
 });
