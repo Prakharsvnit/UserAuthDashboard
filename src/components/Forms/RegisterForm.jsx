@@ -1,24 +1,25 @@
 /* eslint-disable */
-import React from 'react';
+import React from "react";
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { useFormik, Field, FormikProvider,Form } from "formik";
 import { RegisterFormValidation } from "../../formValidation/RegisterFormValidation";
 
 export default function LoginForm() {
-  const registerInitValue = {
-    fullname: "",
-    username: "",
-    countryId: "",
-    mobile: "",
-    email: "",
-    password: "",
-    referral: "",
-  };
-
-  const handleSubmit = (values, props) => {
-    //console.log(JSON.stringify(values))
-    props.resetForm();
-  };
+  const formik = useFormik({
+    initialValues: {
+      fullname: "",
+      username: "",
+      countryId: "",
+      mobile: "",
+      email: "",
+      password: "",
+      referral: "",
+    },
+    validationSchema: RegisterFormValidation,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
 
   return (
     <>
@@ -35,111 +36,123 @@ export default function LoginForm() {
           <Typography variant="h4" sx={{ mb: 2 }}>
             Register
           </Typography>
-          <Formik
-            initialValues={registerInitValue}
-            validationSchema={RegisterFormValidation}
-            onSubmit={handleSubmit}
-          >
-            {(props) => {
-              return (
-                <Form>
-                  <Field
-                    required
-                    as={TextField}
-                    label="Fullname"
-                    type="text"
-                    name="fullname"
-                    fullWidth
-                    variant="outlined"
-                    margin="dense"
-                    helperText={<ErrorMessage name="fullname" />}
-                    error={props.errors.fullname && props.touched.fullname}
-                  />
-                  <Field
-                    required
-                    as={TextField}
-                    label="Username"
-                    type="text"
-                    name="username"
-                    fullWidth
-                    variant="outlined"
-                    margin="dense"
-                    helperText={<ErrorMessage name="username" />}
-                    error={props.errors.username && props.touched.username}
-                  />
-                  <Field
-                    required
-                    as={TextField}
-                    label="Country ID"
-                    type="text"
-                    name="countryId"
-                    fullWidth
-                    variant="outlined"
-                    margin="dense"
-                    helperText={<ErrorMessage name="countryId" />}
-                    error={props.errors.countryId && props.touched.countryId}
-                  />
-                  <Field
-                    required
-                    as={TextField}
-                    label="Mobile"
-                    type="text"
-                    name="mobile"
-                    fullWidth
-                    variant="outlined"
-                    margin="dense"
-                    helperText={<ErrorMessage name="mobile" />}
-                    error={props.errors.mobile && props.touched.mobile}
-                  />
-                  <Field
-                    required
-                    as={TextField}
-                    label="Email ID"
-                    type="email"
-                    name="email"
-                    fullWidth
-                    variant="outlined"
-                    margin="dense"
-                    helperText={<ErrorMessage name="email" />}
-                    error={props.errors.email && props.touched.email}
-                  />
-                  <Field
-                    required
-                    as={TextField}
-                    label="Password"
-                    type="password"
-                    name="password"
-                    fullWidth
-                    variant="outlined"
-                    margin="dense"
-                    helperText={<ErrorMessage name="password" />}
-                    error={props.errors.password && props.touched.password}
-                  />
-                  <Field
-                    required
-                    as={TextField}
-                    label="Referral ID"
-                    type="text"
-                    name="referral"
-                    fullWidth
-                    variant="outlined"
-                    margin="dense"
-                    helperText={<ErrorMessage name="referral" />}
-                    error={props.errors.referral && props.touched.referral}
-                  />
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    sx={{ mt: 2, height: 60 }}
-                    color="primary"
-                    fullWidth
-                  >
-                    Register
-                  </Button>
-                </Form>
-              );
-            }}
-          </Formik>
+
+          <FormikProvider value={formik}>
+            <form onSubmit={formik.handleSubmit}>
+            <Field
+              required
+              as={TextField}
+              id="fullname"
+              name="fullname"
+              label="Fullname"
+              type="text"
+              fullWidth
+              variant="outlined"
+              margin="dense"
+              value={formik.values.fullname}
+              onChange={formik.handleChange}
+              error={formik.touched.fullname && Boolean(formik.errors.fullname)}
+              helperText={formik.touched.fullname && formik.errors.fullname}
+            />
+            <Field
+              required
+              as={TextField}
+              id="username"
+              name="username"
+              label="Username"
+              type="text"
+              fullWidth
+              variant="outlined"
+              margin="dense"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
+            />
+            <Field
+              required
+              as={TextField}
+              id="countryId"
+              name="countryId"
+              label="Country ID"
+              type="text"
+              fullWidth
+              variant="outlined"
+              margin="dense"
+              value={formik.values.countryId}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.countryId && Boolean(formik.errors.countryId)
+              }
+              helperText={formik.touched.countryId && formik.errors.countryId}
+            />
+            <Field
+              required
+              as={TextField}
+              id="mobile"
+              name="mobile"
+              label="Mobile"
+              type="text"
+              fullWidth
+              variant="outlined"
+              margin="dense"
+              value={formik.values.mobile}
+              onChange={formik.handleChange}
+              error={formik.touched.mobile && Boolean(formik.errors.mobile)}
+              helperText={formik.touched.mobile && formik.errors.mobile}
+            />
+            <Field
+              required
+              as={TextField}
+              id="email"
+              name="email"
+              label="Email ID"
+              type="email"
+              fullWidth
+              variant="outlined"
+              margin="dense"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+            />
+            <Field
+              required
+              as={TextField}
+              id="password"
+              fullWidth
+              variant="outlined"
+              name="password"
+              label="Password"
+              type="password"
+              margin="dense"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+            <Field
+              as={TextField}
+              disabled
+              name="referral"
+              label="Referral ID"
+              type="text"
+              fullWidth
+              id="outlined-disabled"
+              margin="dense"
+              value=""
+            />
+            <Button
+              variant="contained"
+              type="submit"
+              sx={{ mt: 2, height: 60 }}
+              color="primary"
+              fullWidth
+            >
+              Register
+            </Button>
+            </form>
+            </FormikProvider>
         </Box>
       </Container>
     </>

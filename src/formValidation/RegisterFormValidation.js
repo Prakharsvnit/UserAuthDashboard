@@ -1,52 +1,44 @@
 import * as yup from "yup";
 
 const PhoneNumberRegEx = /^[789]\d{9}$/;
-const PasswordRegEx =
-//eslint-disable-next-line 
-  /^.*((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/;
 const EmailRegEx =
 //eslint-disable-next-line 
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export const RegisterFormValidation = yup.object().shape({
+export const RegisterFormValidation = yup.object({
   fullname: yup
-    .string()
+    .string('Enter your name')
     .min(3, "Too Short !")
     .max(10, "Too Long !")
     .required("Name Required !"),
 
-  name: yup
-    .string()
+  username: yup
+    .string('Enter username')
     .min(3, "Too Short !")
     .max(10, "Too Long !")
     .required("Username Required !"),
 
   countryId: yup
-    .string()
+    .string('Enter country ID')
     .required("Country Id Required!")
     .matches(/^[0-9]+$/, "Must be only digits"),
 
   mobile: yup
-    .string()
+    .string('Enter Mobile Number')
     .matches(PhoneNumberRegEx, "Enter valid Mobile Number")
     .required("Mobile Number Required !"),
     
-  //this regular expression works on India based phone number starting from 7,8,9
+  // //this regular expression works on India based phone number starting from 7,8,9
 
   email: yup
-    .string()
+    .string('Enter Email ID')
     .required("Email Required")
-    .matches(EmailRegEx, "Enter a valid Email"),
+    .matches(EmailRegEx, "Enter a valid Email ID"),
 
   password: yup
-    .string()
-    .required("Enter Your Password")
-    .matches(PasswordRegEx, "Uppercase Lowercase Special char Required")
-    .min(6, "Password Should be minimum 6 character")
-    .max(10, "Too long"),
+    .string('Enter Password')
+    .min(6, "Password Should be minimum 6 digits")
+    .max(10, "Too long")
+    .required("Password Required")
 
-  referral: yup
-    .string()
-    .required("Enter Referral ID")
-    .matches(/^[0-9]+$/, "Must be only digits"),
 });
