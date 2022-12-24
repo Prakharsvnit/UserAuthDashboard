@@ -1,20 +1,19 @@
 import React from "react";
-import { Box } from "@mui/material";
+// import { Box } from "@mui/material";
+import { Routes, Route } from "react-router-dom";
 import RegisterForm from "./components/Forms/RegisterForm";
+import LoginForm from "./components/Forms/LoginForm";
+import Dashboard from "./components/Forms/Dashboard";
 
 function App() {
   return (
-    <div className="App">
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <RegisterForm />
-      </Box>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<RegisterForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </>
   );
 }
 

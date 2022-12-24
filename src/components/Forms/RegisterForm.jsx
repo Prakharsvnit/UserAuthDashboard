@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFormik, Field, FormikProvider } from "formik";
-import LoginForm from "./LoginForm";
 import { RegisterFormValidation } from "../../formValidation/RegisterFormValidation";
 
 export default function RegisterForm() {
@@ -209,9 +208,6 @@ export default function RegisterForm() {
       <Typography variant="h4" sx={{ my: 2 }}>
         {errorMessage}
       </Typography>
-      <Routes>
-        <Route path="/login" element={<LoginForm />} />
-      </Routes>
     </>
   );
 }

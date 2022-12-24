@@ -1,20 +1,53 @@
 /* eslint-disable*/
-import React from 'react';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { useFormik, Field, FormikProvider } from "formik";
 import { LoginFormValidation } from "../../formValidation/LoginFormValidation";
 
 export default function LoginForm() {
-  const loginInitValue = {
-    email: "",
-    password: "",
-  };
+  const navigate = useNavigate();
 
-  const handleSubmit = (values, props) => {
-    //console.log(JSON.stringify(values))
-    props.resetForm();
-  };
+  const [errorMessage, setErrorMessage] = useState("");
 
+  const formik = useFormik({
+    initialValues: {
+      login_id: "",
+      password: "",
+    },
+    validationSchema: LoginFormValidation,
+    onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      const loginData = JSON.stringify(values, null, 2);
+      const login_url =
+        "https://lobster-app-ddwng.ondigitalocean.app/user/login";
+      const options = {
+        method: "POST",
+        url: login_url,
+        headers: {
+          "Content-Type": "application/json",
+          api_key: "Z9Q7WKEY7ORGBUFGN3EG1QS5Y7FG8DU29GHKKSZH",
+        },
+        data: loginData,
+      };
+      axios
+        .request(options)
+        .then((response) => {
+          console.log("response", response.data);
+          if (response?.data?.status) {
+            navigate("/dashoard");
+          } else {
+            let err = response?.data?.message;
+            Object.keys(err).map((key) => setErrorMessage(err[key]));
+          }
+        })
+        .catch((errors) => {
+          console.log("error", errors);
+        });
+      resetForm();
+    },
+  });
 
   return (
     <>
@@ -32,53 +65,59 @@ export default function LoginForm() {
           <Typography variant="h4" sx={{ mb: 2 }}>
             Login
           </Typography>
-          <Formik
-            initialValues={loginInitValue}
-            validationSchema={LoginFormValidation}
-            onSubmit={handleSubmit}
-          >
-            {(props) => {
-              return (
-                <Form>
-                  <Field
-                    required
-                    as={TextField}
-                    label="Email"
-                    type="email"
-                    name="email"
-                    fullWidth
-                    variant="outlined"
-                    margin="dense"
-                    helperText={<ErrorMessage name="email" />}
-                    error={props.errors.email && props.touched.email}
-                  />
 
-                  <Field
-                    as={TextField}
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    helperText={<ErrorMessage name="password" />}
-                    error={props.errors.password && props.touched.password}
-                  />
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    sx={{ mt: 2, height: 60 }}
-                    color="primary"
-                    fullWidth
-                  >
-                    Submit
-                  </Button>
-                </Form>
-              );
-            }}
-          </Formik>
+          <FormikProvider value={formik}>
+            <form onSubmit={formik.handleSubmit}>
+              <Field
+                required
+                as={TextField}
+                id="login_id"
+                name="login_id"
+                label="Login Id"
+                type="email"
+                fullWidth
+                variant="outlined"
+                margin="dense"
+                value={formik.values.login_id}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.login_id && Boolean(formik.errors.login_id)
+                }
+                helperText={formik.touched.login_id && formik.errors.login_id}
+              />
+              <Field
+                required
+                as={TextField}
+                id="password"
+                fullWidth
+                variant="outlined"
+                name="password"
+                label="Password"
+                type="password"
+                margin="dense"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+              />
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{ mt: 2, height: 60 }}
+                color="primary"
+                fullWidth
+              >
+                Submit
+              </Button>
+            </form>
+          </FormikProvider>
         </Box>
       </Container>
+      <Typography variant="h4" sx={{ my: 2 }}>
+        {errorMessage}
+      </Typography>
     </>
   );
 }
