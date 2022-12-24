@@ -1,12 +1,18 @@
-import React from 'react';
+import React from "react";
 import { Box } from "@mui/material";
-import Home from "./components/Home"
+import RegisterForm from "./components/Forms/RegisterForm";
 
 function App() {
   return (
     <div className="App">
-      <Box sx={{ display: "flex", flexDirection: "row",justifyContent:'space-between' }}>
-        <Home />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <RegisterForm />
       </Box>
     </div>
   );

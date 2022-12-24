@@ -1,12 +1,15 @@
-/* eslint-disable */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
-import { useFormik, Field, FormikProvider, Form } from "formik";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useFormik, Field, FormikProvider } from "formik";
+import LoginForm from "./LoginForm";
 import { RegisterFormValidation } from "../../formValidation/RegisterFormValidation";
 
-export default function LoginForm() {
-  // const [registerData, setRegisterData] = useState({});
+export default function RegisterForm() {
+  const navigate = useNavigate();
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -19,7 +22,7 @@ export default function LoginForm() {
       referral: "",
     },
     validationSchema: RegisterFormValidation,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       console.log(values);
       const registerData = JSON.stringify(values, null, 2);
       const register_url =
@@ -35,9 +38,21 @@ export default function LoginForm() {
         data: registerData,
       };
 
-      axios.request(options).then((response) => {
-        console.log("response", response.data);
-      });
+      axios
+        .request(options)
+        .then((response) => {
+          console.log("response", response.data);
+          if (response?.data?.status) {
+            navigate("/login");
+          } else {
+            let err = response?.data?.message;
+            Object.keys(err).map((key) => setErrorMessage(err[key]));
+          }
+        })
+        .catch((errors) => {
+          console.log("error", errors);
+        });
+      resetForm();
     },
   });
 
@@ -191,6 +206,12 @@ export default function LoginForm() {
           </FormikProvider>
         </Box>
       </Container>
+      <Typography variant="h4" sx={{ my: 2 }}>
+        {errorMessage}
+      </Typography>
+      <Routes>
+        <Route path="/login" element={<LoginForm />} />
+      </Routes>
     </>
   );
 }
