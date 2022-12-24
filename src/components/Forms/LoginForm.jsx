@@ -36,7 +36,7 @@ export default function LoginForm() {
         .then((response) => {
           console.log("response", response.data);
           if (response?.data?.status) {
-            navigate("/dashoard");
+            navigate("/dashboard");
           } else {
             let err = response?.data?.message;
             Object.keys(err).map((key) => setErrorMessage(err[key]));

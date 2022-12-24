@@ -5,7 +5,7 @@ const EmailRegEx =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export const LoginFormValidation = yup.object().shape({
-  email_id: yup
+  login_id: yup
     .string("Enter Email Id")
     .required("Email Required")
     .matches(EmailRegEx, "Invalid Email"),

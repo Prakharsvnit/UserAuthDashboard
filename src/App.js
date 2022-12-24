@@ -1,5 +1,4 @@
 import React from "react";
-// import { Box } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import RegisterForm from "./components/Forms/RegisterForm";
 import LoginForm from "./components/Forms/LoginForm";
