@@ -1,13 +1,17 @@
 /* eslint-disable*/
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
 import { useFormik, Field, FormikProvider } from "formik";
 import { LoginFormValidation } from "../../formValidation/LoginFormValidation";
+import { userDataActions } from "../../userDataSlice";
 
 export default function LoginForm() {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -36,6 +40,7 @@ export default function LoginForm() {
         .then((response) => {
           console.log("response", response.data);
           if (response?.data?.status) {
+            dispatch(userDataActions.dispatchUserData(response.data.message));
             navigate("/dashboard");
           } else {
             let err = response?.data?.message;

@@ -1,30 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import {
   Box,
   Container,
   Typography,
   Table,
-  TableBody,
+  // TableBody,
   TableCell,
   TableHead,
   TableRow,
 } from "@mui/material";
 
 export default function Dashboard() {
-  function createData(name, calories, fat, carbs, protein, arf) {
-    return { name, calories, fat, carbs, protein, arf };
-  }
+  const userInfo = useSelector((state) => state.fetchUserData.userDetails);
 
-  const rows = [
-    createData(
-      "Peter Parker",
-      "peter123",
-      "102",
-      "pete@gmail.com",
-      "9786543412",
-      1478
-    ),
-  ];
+  console.log(userInfo);
+
   return (
     <>
       <Container maxWidth="md">
@@ -62,7 +53,7 @@ export default function Dashboard() {
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            {/* <TableBody>
               {rows.map((row) => (
                 <TableRow
                   key={row.name}
@@ -78,7 +69,7 @@ export default function Dashboard() {
                   <TableCell align="right">{row.arf}</TableCell>
                 </TableRow>
               ))}
-            </TableBody>
+            </TableBody> */}
           </Table>
         </Box>
       </Container>
