@@ -1,12 +1,12 @@
 /* eslint-disable*/
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
 import { useFormik, Field, FormikProvider } from "formik";
 import { LoginFormValidation } from "../../formValidation/LoginFormValidation";
-import { userDataActions } from "../../userDataSlice";
+import { userActions } from "../../store/userData";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ export default function LoginForm() {
   const dispatch = useDispatch();
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [userDetails, setUserDetails] = useState([]);
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +23,7 @@ export default function LoginForm() {
     },
     validationSchema: LoginFormValidation,
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
+      // console.log(values);
       const loginData = JSON.stringify(values, null, 2);
       const login_url =
         "https://lobster-app-ddwng.ondigitalocean.app/user/login";
@@ -38,9 +39,10 @@ export default function LoginForm() {
       axios
         .request(options)
         .then((response) => {
-          console.log("response", response.data);
+          // console.log("response", response.data);
           if (response?.data?.status) {
-            dispatch(userDataActions.dispatchUserData(response.data.message));
+            setUserDetails(response?.data?.message);
+            dispatch(userActions.addUserDetails(response.data.message));
             navigate("/dashboard");
           } else {
             let err = response?.data?.message;
@@ -53,6 +55,13 @@ export default function LoginForm() {
       resetForm();
     },
   });
+
+  useEffect(() => {
+    if (userDetails) {
+      // passing data to redux
+      dispatch(userActions.addUserDetails(userDetails));
+    }
+  }, [userDetails, dispatch]);
 
   return (
     <>

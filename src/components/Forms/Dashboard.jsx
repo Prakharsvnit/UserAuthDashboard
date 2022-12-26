@@ -5,16 +5,14 @@ import {
   Container,
   Typography,
   Table,
-  // TableBody,
+  TableBody,
   TableCell,
   TableHead,
   TableRow,
 } from "@mui/material";
 
 export default function Dashboard() {
-  const userInfo = useSelector((state) => state.fetchUserData.userDetails);
-
-  console.log(userInfo);
+  const userInfo = useSelector((state) => state.userData.userValue);
 
   return (
     <>
@@ -53,23 +51,20 @@ export default function Dashboard() {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {/* <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  key={row.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
-                  <TableCell align="right">{row.arf}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody> */}
+            <TableBody>
+              <TableRow
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="userInfo">
+                  {userInfo.full_name}
+                </TableCell>
+                <TableCell align="right">{userInfo.username}</TableCell>
+                <TableCell align="right">{userInfo.country_row_id}</TableCell>
+                <TableCell align="right">{userInfo.email_id}</TableCell>
+                <TableCell align="right">{userInfo.mobile_number}</TableCell>
+                <TableCell align="right">{userInfo.referral_row_id}</TableCell>
+              </TableRow>
+            </TableBody>
           </Table>
         </Box>
       </Container>
