@@ -23,7 +23,6 @@ export default function LoginForm() {
     },
     validationSchema: LoginFormValidation,
     onSubmit: (values, { resetForm }) => {
-      // console.log(values);
       const loginData = JSON.stringify(values, null, 2);
       const login_url =
         "https://lobster-app-ddwng.ondigitalocean.app/user/login";
@@ -39,7 +38,6 @@ export default function LoginForm() {
       axios
         .request(options)
         .then((response) => {
-          // console.log("response", response.data);
           if (response?.data?.status) {
             setUserDetails(response?.data?.message);
             dispatch(userActions.addUserDetails(response.data.message));
