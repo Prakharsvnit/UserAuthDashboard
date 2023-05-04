@@ -22,7 +22,6 @@ export default function RegisterForm() {
     },
     validationSchema: RegisterFormValidation,
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
       const registerData = JSON.stringify(values, null, 2);
       const register_url =
         "https://lobster-app-ddwng.ondigitalocean.app/user/register";
@@ -40,7 +39,6 @@ export default function RegisterForm() {
       axios
         .request(options)
         .then((response) => {
-          console.log("response", response.data);
           if (response?.data?.status) {
             navigate("/login");
           } else {
