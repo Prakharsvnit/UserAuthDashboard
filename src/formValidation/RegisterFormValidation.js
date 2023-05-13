@@ -16,7 +16,7 @@ export const RegisterFormValidation = yup.object({
   mobile_number: yup
     .string()
     .matches(PhoneNumberRegEx, "Please enter valid Mobile Number")
-    .required("Mobile Number Required !"),
+    .required("Please enter Mobile Number"),
 
   email_id: yup
     .string()
