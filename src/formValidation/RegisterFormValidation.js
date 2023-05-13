@@ -18,6 +18,11 @@ export const RegisterFormValidation = yup.object({
     .matches(PhoneNumberRegEx, "Please enter valid Mobile Number")
     .required("Please enter Mobile Number"),
 
+  country_row_id: yup
+  .string()
+  .required("Please enter Country Id")
+  .matches(/^[0-9]+$/, "Must be only digits"),
+
   email_id: yup
     .string()
     .email('Invalid email address')
