@@ -59,8 +59,10 @@ export default function Dashboard() {
                   {userInfo.full_name}
                 </TableCell>
                 <TableCell align="right">{userInfo.username}</TableCell>
+                <TableCell align="right">{userInfo.country_row_id}</TableCell>
                 <TableCell align="right">{userInfo.email_id}</TableCell>
                 <TableCell align="right">{userInfo.mobile_number}</TableCell>
+                <TableCell align="right">{userInfo.referral_row_id}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
