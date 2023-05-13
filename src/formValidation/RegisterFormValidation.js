@@ -1,44 +1,31 @@
 import * as yup from "yup";
 
-const PhoneNumberRegEx = /^[789]\d{9}$/;
-const EmailRegEx =
-//eslint-disable-next-line 
-  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const PhoneNumberRegEx = /^\d{10}$/;
 
 export const RegisterFormValidation = yup.object({
   full_name: yup
-    .string('Enter your name')
-    .min(3, "Too Short !")
+    .string()
     .max(10, "Too Long !")
-    .required("Name Required !"),
+    .required("Please enter name"),
 
   username: yup
-    .string('Enter username')
-    .min(3, "Too Short !")
+    .string()
     .max(10, "Too Long !")
-    .required("Username Required !"),
-
-  country_row_id: yup
-    .string('Enter country ID')
-    .required("Country Id Required!")
-    .matches(/^[0-9]+$/, "Must be only digits"),
+    .required("Please enter Username"),
 
   mobile_number: yup
-    .string('Enter Mobile Number')
-    .matches(PhoneNumberRegEx, "Enter valid Mobile Number")
+    .string()
+    .matches(PhoneNumberRegEx, "Please enter valid Mobile Number")
     .required("Mobile Number Required !"),
-    
-  // //this regular expression works on India based phone number starting from 7,8,9
 
   email_id: yup
-    .string('Enter Email ID')
-    .required("Email Required")
-    .matches(EmailRegEx, "Enter a valid Email ID"),
+    .string()
+    .email('Invalid email address')
+    .required("Please enter Email Id"),
 
   password: yup
-    .string('Enter Password')
+    .string()
     .min(6, "Password Should be minimum 6 digits")
-    .max(10, "Too long")
-    .required("Password Required")
+    .required("Please enter password")
 
 });

@@ -108,26 +108,6 @@ export default function RegisterForm() {
               <Field
                 required
                 as={TextField}
-                id="country_row_d"
-                name="country_row_id"
-                label="Country ID"
-                type="text"
-                fullWidth
-                variant="outlined"
-                margin="dense"
-                value={formik.values.country_row_id}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.country_row_id &&
-                  Boolean(formik.errors.country_row_id)
-                }
-                helperText={
-                  formik.touched.country_row_id && formik.errors.country_row_id
-                }
-              />
-              <Field
-                required
-                as={TextField}
                 id="mobile_number"
                 name="mobile_number"
                 label="Mobile"
@@ -178,17 +158,6 @@ export default function RegisterForm() {
                   formik.touched.password && Boolean(formik.errors.password)
                 }
                 helperText={formik.touched.password && formik.errors.password}
-              />
-              <Field
-                as={TextField}
-                disabled
-                name="referral"
-                label="Referral ID"
-                type="text"
-                fullWidth
-                id="outlined-disabled"
-                margin="dense"
-                value=""
               />
               <Button
                 variant="contained"
